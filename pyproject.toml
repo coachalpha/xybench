@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "xybench"
+version = "0.1.0"
+description = "Eval framework for AI applications, starting with human-in-the-loop review."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.10"
+authors = [
+    { name = "xybench contributors" },
+]
+keywords = ["ai", "eval", "hitl", "human-in-the-loop", "review", "langgraph"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.optional-dependencies]
+langgraph = ["langgraph>=0.2.0"]
+streamlit = ["streamlit>=1.30.0"]
+slack = ["httpx>=0.25.0"]
+email = []
+all = ["xybench[langgraph,streamlit,slack]"]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+
+[project.urls]
+Homepage = "https://github.com/xybench/xybench"
+Documentation = "https://github.com/xybench/xybench#readme"
+Repository = "https://github.com/xybench/xybench"
+Issues = "https://github.com/xybench/xybench/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/xybench"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
